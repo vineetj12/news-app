@@ -36,3 +36,9 @@ yarn-error.log*
 # Misc
 .DS_Store
 *.pem
+
+# ML datasets (keep models/code, ignore large raw data files)
+apps/ml-api/model/*.csv
+apps/ml-api/model/*.tsv
+apps/ml-api/model/*.parquet
+apps/ml-api/model/*.zip
