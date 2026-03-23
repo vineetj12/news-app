@@ -1,6 +1,7 @@
 import { useState, useEffect } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { Newspaper, Mail, Lock, Moon, Sun } from "lucide-react";
+import { AxiosError } from "axios";
 import { authAPI } from "@/services/apiService";
 import { store } from "@/lib/store";
 
@@ -33,7 +34,9 @@ const LoginPage = () => {
         setError(data.message || "Signin failed");
       }
     } catch (error) {
-      setError("An error occurred during signin");
+      const axiosError = error as AxiosError<{ message?: string }>;
+      const message = axiosError.response?.data?.message || "An error occurred during signin";
+      setError(message);
       console.error("Signin error:", error);
     }
   };
