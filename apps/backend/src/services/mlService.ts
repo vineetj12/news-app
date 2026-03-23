@@ -27,7 +27,7 @@ class MLService {
       const response = await axios.post(`${this.ML_API_URL}/predict`, {
         text: text.trim()
       }, {
-        timeout: 5000, 
+        timeout: 30000, 
         headers: {
           'Content-Type': 'application/json'
         }
@@ -51,7 +51,7 @@ class MLService {
       const requests = texts.map(text => ({ text: text.trim() }));
       
       const response = await axios.post(`${this.ML_API_URL}/batch-predict`, requests, {
-        timeout: 10000, 
+        timeout: 30000, 
         headers: {
           'Content-Type': 'application/json'
         }
@@ -70,7 +70,7 @@ class MLService {
   async healthCheck(): Promise<{ status: string; model_loaded: boolean }> {
     try {
       const response = await axios.get(`${this.ML_API_URL}/health`, {
-        timeout: 3000
+        timeout: 10000
       });
       
       return response.data;
