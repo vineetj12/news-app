@@ -14,7 +14,7 @@ const app=express()
 app.use(cors())
 app.use(express.json())
 app.use(requestLogger)
-const Port=3000;
+const Port = parseInt(process.env.PORT || "3000", 10);
 
 app.use("/auth", authRoutes);
 app.use("/news",authMiddleware,newsRoutes);
