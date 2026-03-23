@@ -1,0 +1,4 @@
+# This file ensures the model folder is tracked by git
+# Place your model files here:
+# - best_fake_news_model.pkl
+# - vectorizer.pkl

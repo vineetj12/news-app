@@ -1,0 +1,111 @@
+@import url('https://fonts.googleapis.com/css2?family=Source+Sans+3:wght@300;400;500;600;700&family=Merriweather:wght@400;700&display=swap');
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    --background: 0 0% 97%;
+    --foreground: 220 20% 14%;
+
+    --card: 0 0% 100%;
+    --card-foreground: 220 20% 14%;
+
+    --popover: 0 0% 100%;
+    --popover-foreground: 220 20% 14%;
+
+    --primary: 214 84% 46%;
+    --primary-foreground: 0 0% 100%;
+
+    --secondary: 220 14% 96%;
+    --secondary-foreground: 220 20% 14%;
+
+    --muted: 220 14% 96%;
+    --muted-foreground: 220 10% 46%;
+
+    --accent: 214 84% 96%;
+    --accent-foreground: 214 84% 36%;
+
+    --destructive: 0 84.2% 60.2%;
+    --destructive-foreground: 0 0% 100%;
+
+    --border: 220 13% 91%;
+    --input: 220 13% 91%;
+    --ring: 214 84% 46%;
+
+    --radius: 0.75rem;
+
+    --nav-height: 4rem;
+
+    --sidebar-background: 0 0% 98%;
+    --sidebar-foreground: 240 5.3% 26.1%;
+    --sidebar-primary: 240 5.9% 10%;
+    --sidebar-primary-foreground: 0 0% 98%;
+    --sidebar-accent: 240 4.8% 95.9%;
+    --sidebar-accent-foreground: 240 5.9% 10%;
+    --sidebar-border: 220 13% 91%;
+    --sidebar-ring: 217.2 91.2% 59.8%;
+
+    --trending-gradient: linear-gradient(135deg, hsl(214 84% 46%), hsl(200 80% 50%));
+    --card-shadow: 0 1px 3px 0 hsl(220 20% 14% / 0.06), 0 1px 2px -1px hsl(220 20% 14% / 0.06);
+    --card-shadow-hover: 0 10px 25px -5px hsl(220 20% 14% / 0.1), 0 8px 10px -6px hsl(220 20% 14% / 0.08);
+  }
+
+  .dark {
+    --background: 222 20% 7%;
+    --foreground: 220 14% 90%;
+
+    --card: 222 18% 11%;
+    --card-foreground: 220 14% 90%;
+
+    --popover: 222 18% 11%;
+    --popover-foreground: 220 14% 90%;
+
+    --primary: 214 84% 56%;
+    --primary-foreground: 0 0% 100%;
+
+    --secondary: 222 16% 16%;
+    --secondary-foreground: 220 14% 90%;
+
+    --muted: 222 16% 16%;
+    --muted-foreground: 220 10% 56%;
+
+    --accent: 214 40% 16%;
+    --accent-foreground: 214 84% 70%;
+
+    --destructive: 0 62.8% 30.6%;
+    --destructive-foreground: 0 0% 100%;
+
+    --border: 222 16% 20%;
+    --input: 222 16% 20%;
+    --ring: 214 84% 56%;
+
+    --card-shadow: 0 1px 3px 0 hsl(0 0% 0% / 0.2);
+    --card-shadow-hover: 0 10px 25px -5px hsl(0 0% 0% / 0.3);
+  }
+}
+
+@layer base {
+  * {
+    @apply border-border;
+  }
+
+  body {
+    @apply bg-background text-foreground font-sans antialiased;
+    font-family: 'Source Sans 3', system-ui, sans-serif;
+  }
+
+  h1, h2, h3, h4 {
+    font-family: 'Merriweather', Georgia, serif;
+  }
+}
+
+@layer utilities {
+  .card-shadow {
+    box-shadow: var(--card-shadow);
+  }
+  .card-shadow-hover {
+    box-shadow: var(--card-shadow-hover);
+  }
+}
