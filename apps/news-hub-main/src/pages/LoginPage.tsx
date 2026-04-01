@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react";
 import { Link, useNavigate } from "react-router-dom";
-import { Newspaper, Mail, Lock, Moon, Sun } from "lucide-react";
+import { Newspaper, Mail, Lock, Moon, Sun, Loader2 } from "lucide-react";
 import { AxiosError } from "axios";
 import { authAPI } from "@/services/apiService";
 import { store } from "@/lib/store";
@@ -10,6 +10,7 @@ const LoginPage = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [error, setError] = useState("");
+  const [isLoading, setIsLoading] = useState(false);
   const [darkMode, setDarkMode] = useState(() => document.documentElement.classList.contains("dark"));
 
   useEffect(() => {
@@ -18,10 +19,15 @@ const LoginPage = () => {
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
+    if (isLoading) return;
+
     if (!email || !password) {
       setError("Please fill in all fields");
       return;
     }
+
+    setError("");
+    setIsLoading(true);
     
     try {
       const data = await authAPI.signin(email, password);
@@ -38,6 +44,8 @@ const LoginPage = () => {
       const message = axiosError.response?.data?.message || "An error occurred during signin";
       setError(message);
       console.error("Signin error:", error);
+    } finally {
+      setIsLoading(false);
     }
   };
 
@@ -92,9 +100,11 @@ const LoginPage = () => {
 
           <button
             type="submit"
-            className="w-full rounded-md bg-primary py-2.5 text-sm font-semibold text-primary-foreground transition-colors hover:bg-primary/90"
+            disabled={isLoading}
+            className="flex w-full items-center justify-center gap-2 rounded-md bg-primary py-2.5 text-sm font-semibold text-primary-foreground transition-colors hover:bg-primary/90 disabled:cursor-not-allowed disabled:opacity-70"
           >
-            Sign In
+            {isLoading && <Loader2 className="h-4 w-4 animate-spin" />}
+            {isLoading ? "Signing in..." : "Sign In"}
           </button>
 
           <p className="text-center text-sm text-muted-foreground">

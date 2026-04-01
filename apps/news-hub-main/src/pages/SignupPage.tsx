@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react";
 import { Link, useNavigate } from "react-router-dom";
-import { Newspaper, Mail, Lock, User, Moon, Sun } from "lucide-react";
+import { Newspaper, Mail, Lock, User, Moon, Sun, Loader2 } from "lucide-react";
 import { AxiosError } from "axios";
 import { authAPI } from "@/services/apiService";
 import { store } from "@/lib/store";
@@ -12,6 +12,7 @@ const SignupPage = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [error, setError] = useState("");
+  const [isLoading, setIsLoading] = useState(false);
   const [darkMode, setDarkMode] = useState(() => document.documentElement.classList.contains("dark"));
 
   useEffect(() => {
@@ -20,6 +21,8 @@ const SignupPage = () => {
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
+    if (isLoading) return;
+
     if (!name || !email || !password) {
       setError("Please fill in all fields");
       return;
@@ -28,6 +31,9 @@ const SignupPage = () => {
       setError("Password must be at least 6 characters");
       return;
     }
+
+    setError("");
+    setIsLoading(true);
 
     try {
       const data = await authAPI.signup(name, email, password);
@@ -43,6 +49,8 @@ const SignupPage = () => {
       const message = axiosError.response?.data?.message || "An error occurred during signup";
       console.error("Signup error:", error);
       setError(message);
+    } finally {
+      setIsLoading(false);
     }
   };
 
@@ -111,9 +119,11 @@ const SignupPage = () => {
 
           <button
             type="submit"
-            className="w-full rounded-md bg-primary py-2.5 text-sm font-semibold text-primary-foreground transition-colors hover:bg-primary/90"
+            disabled={isLoading}
+            className="flex w-full items-center justify-center gap-2 rounded-md bg-primary py-2.5 text-sm font-semibold text-primary-foreground transition-colors hover:bg-primary/90 disabled:cursor-not-allowed disabled:opacity-70"
           >
-            Create Account
+            {isLoading && <Loader2 className="h-4 w-4 animate-spin" />}
+            {isLoading ? "Creating account..." : "Create Account"}
           </button>
 
           <p className="text-center text-sm text-muted-foreground">
