@@ -16,5 +16,5 @@ export interface Article {
   reliabilityScore: number; // 1-10
   aiSummary: string;
   topics: Topic[];
-  originalUrl?: string;
+  originalUrl?: string; 
 }
