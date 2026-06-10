@@ -27,6 +27,13 @@ app.get("/",(req:Request,res:Response)=>{
     })
 })
 
+app.get("/health",(req:Request,res:Response)=>{
+    res.status(STATUS_CODES.OK).json({
+        "status":"healthy",
+        "timestamp":new Date().toISOString()
+    })
+})
+
 app.listen(Port,()=>{
     console.log(`Primary Backend is running at port: ${Port}`);
 })
